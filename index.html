@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For My Polar Star 🌟</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,6 +34,203 @@
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #fb7185; border-radius: 4px; }
+        .hidden-stage { display: none !important; }
+    </style>
+</head>
+<body class="min-h-[100dvh] bg-gradient-to-br from-rose-100 via-pink-50 to-indigo-100 flex items-center justify-center p-4 overflow-x-hidden relative text-slate-800">
+
+    <div id="bg-hearts" class="fixed inset-0 overflow-hidden pointer-events-none"></div>
+
+    <!-- STAGE 1: ENVELOPE -->
+    <div id="stage-envelope" class="w-full flex justify-center z-10 animate-fade-in-up">
+        <div onclick="nextStage('letter')" class="group cursor-pointer relative bg-white w-[85vw] max-w-sm aspect-[4/3] rounded-lg shadow-2xl flex items-center justify-center border-2 border-rose-200 transform transition-all duration-500 hover:scale-105 hover:rotate-1">
+            <div class="absolute -top-10 animate-bounce">
+                <i data-lucide="mail" class="w-12 h-12 text-rose-500"></i>
+            </div>
+            <div class="text-center px-4">
+                <p class="serif text-rose-800 text-xl md:text-2xl font-medium mb-2">For My Polar Star 🌟</p>
+                <p class="text-xs text-rose-400 uppercase tracking-widest">Tap to open</p>
+            </div>
+            <div class="absolute w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shadow-lg border-2 border-red-400 right-4 bottom-4 group-hover:bg-red-500 transition-colors">
+                <i data-lucide="heart" class="w-6 h-6 text-white fill-current"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAGE 2: THE LETTER -->
+    <div id="stage-letter" class="hidden-stage w-full max-w-lg bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden z-10 animate-fade-in-up border border-white/50 my-4">
+        <div class="h-2 bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 w-full"></div>
+        <div class="p-6 md:p-8 max-h-[75vh] md:max-h-[80vh] overflow-y-auto custom-scrollbar">
+            <h1 class="serif text-2xl md:text-3xl text-rose-700 mb-6 text-center leading-tight">
+                A Letter for My<br />Polar Star <i data-lucide="stars" class="inline w-6 h-6 text-yellow-500 mb-1"></i>
+            </h1>
+            <div class="space-y-4 text-slate-700 text-sm md:text-base leading-relaxed serif">
+                <p>Hey,</p>
+                <p>I’m writing this because sometimes my words get tangled up when I’m in front of you. I know I’ve made mistakes lately—probably more than I should. I know there are moments when I don’t understand the things you need, or I fail to show you how much you truly mean to me.</p>
+                <p>Sometimes, I feel like I’m failing at being the person you deserve. But I want you to know that even when I’m clumsy or quiet, my heart is always trying its best to reach yours. You have always been my <strong>Polar Star</strong>, the one who guides me when I’m lost in my own head.</p>
+                
+                <div class="bg-rose-50 p-4 rounded-lg border-l-4 border-rose-300 my-6 italic text-rose-800 text-center text-sm md:text-base">
+                    <p>"Mana ki bhatak jata hoon aksar raahon mein,<br/>Par teri hi roshni se har rasta nazaar aata hai.<br/>Tu naraz ho toh ruk jati hai dhadkan meri,<br/>Tujhse hi toh mera har ek pal muskuraata hai."</p>
+                </div>
+
+                <p>I’m sorry for the times I didn't listen well or the times I didn't make you feel like the priority you are. I am still learning how to be the man you need, and I might trip along the way, but I promise I will never stop trying for us.</p>
+                <p>My heart has a "Neural Link" to yours that I never want to break. Please don't stay upset for too long; my world is a little darker when I can't see your smile.</p>
+
+                <div class="bg-rose-50 p-4 rounded-lg border-l-4 border-rose-300 my-6 italic text-rose-800 text-center text-sm md:text-base">
+                    <p>"Khata ho gayi ho toh maaf kar dena,<br/>Mere jazbaaton ko saaf padh lena.<br/>Nahi seekha hai maine dhang se ishq jatana,<br/>Par meri har koshish mein sirf tum hi rehna."</p>
+                </div>
+                <p class="text-right font-bold mt-4 text-rose-600">- Yours, always trying.</p>
+            </div>
+            <button onclick="nextStage('apology')" class="w-full mt-8 bg-rose-500 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-rose-600 transition-all flex items-center justify-center gap-2 group active:scale-95 touch-manipulation">
+                Wait, one small request... <i data-lucide="heart" class="w-4 h-4 group-hover:scale-125 transition-transform"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- STAGE 3: APOLOGY (YES/NO) -->
+    <div id="stage-apology" class="hidden-stage w-full max-w-sm bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-8 z-10 text-center animate-pop-in border-4 border-rose-100">
+        <div class="mb-6 flex justify-center"><div class="bg-rose-100 p-4 rounded-full"><i data-lucide="frown" class="w-12 h-12 text-rose-500"></i></div></div>
+        <h2 class="text-xl font-bold text-slate-800 mb-6 serif leading-relaxed">"Plz agar hoga toh maaf kar de..."</h2>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="nextStage('proposal')" class="w-full sm:flex-1 py-3 bg-green-500 text-white rounded-xl font-bold text-lg shadow-lg transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 touch-manipulation">
+                <i data-lucide="smile" class="w-5 h-5"></i> Yes
+            </button>
+            <button id="btn-no" onclick="handleNoClick()" class="w-full sm:flex-1 py-3 bg-slate-200 text-slate-600 rounded-xl font-bold text-lg shadow-inner hover:bg-slate-300 transition-colors touch-manipulation">No</button>
+        </div>
+    </div>
+
+    <!-- STAGE 4: PROPOSAL -->
+    <div id="stage-proposal" class="hidden-stage w-full max-w-sm bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-8 z-10 text-center animate-pop-in border-4 border-rose-100">
+        <div class="mb-6 flex justify-center">
+            <div class="relative">
+                <div class="absolute -inset-1 rounded-full bg-rose-400 blur opacity-75 animate-pulse"></div>
+                <div class="relative bg-white p-4 rounded-full"><i data-lucide="sparkles" class="w-12 h-12 text-rose-500"></i></div>
+            </div>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-2 serif">Happy Propose Day!</h2>
+        <p class="text-rose-600 font-medium mb-6">Will you be my everything?</p>
+        <p class="text-slate-600 text-sm mb-8 italic">"Duniya badle toh badle, par tum mat badalna,<br/>Meri har khushi ki, tum hi toh chabi hai."</p>
+        <div class="flex flex-col gap-3">
+            <button onclick="sendResponseAndSuccess()" class="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white rounded-xl font-bold text-lg shadow-lg transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 touch-manipulation">
+                <i data-lucide="check" class="w-5 h-5"></i> YES, I will!
+            </button>
+        </div>
+    </div>
+
+    <!-- STAGE 5: SUCCESS -->
+    <div id="stage-success" class="hidden-stage text-center z-10 animate-pop-in px-4">
+        <h1 class="text-4xl md:text-6xl font-bold text-rose-600 mb-4 drop-shadow-sm serif">She Said Yes! ❤️</h1>
+        <p class="text-lg md:text-xl text-slate-700 mb-8">You just made me the happiest person alive.</p>
+        <div class="inline-block bg-white p-4 rounded-full shadow-xl animate-bounce">
+            <i data-lucide="heart" class="w-16 h-16 text-rose-500 fill-current"></i>
+        </div>
+    </div>
+
+    <div id="confetti-container" class="fixed inset-0 overflow-hidden pointer-events-none z-20"></div>
+
+    <script>
+        // ******************************************************
+        // ✅ SETUP COMPLETE - ALL KEYS INTEGRATED
+        // ******************************************************
+        
+        const EMAILJS_PUBLIC_KEY = "AaMA0REytdKnOD5Ty"; 
+        const EMAILJS_SERVICE_ID = "service_q7xf0fl"; 
+        const EMAILJS_TEMPLATE_ID = "template_noy0tur"; 
+        
+        // ******************************************************
+
+        // Initialize EmailJS
+        (function() {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        })();
+
+        lucide.createIcons();
+        
+        // Background Hearts
+        const bgContainer = document.getElementById('bg-hearts');
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('absolute', 'text-pink-200', 'opacity-50', 'animate-float');
+            heart.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+            const left = Math.random() * 100;
+            const size = Math.random() * 20 + 10;
+            const duration = 5 + Math.random() * 10;
+            const delay = Math.random() * 5;
+            heart.style.left = `${left}%`;
+            heart.style.bottom = '-10%';
+            heart.style.transform = `scale(${size/24})`;
+            heart.style.fontSize = `${size}px`;
+            heart.style.animation = `floatUp ${duration}s linear infinite`;
+            heart.style.animationDelay = `${delay}s`;
+            bgContainer.appendChild(heart);
+        }
+
+        function nextStage(stageName) {
+            ['envelope', 'letter', 'apology', 'proposal', 'success'].forEach(id => {
+                document.getElementById(`stage-${id}`).classList.add('hidden-stage');
+            });
+            const stage = document.getElementById(`stage-${stageName}`);
+            stage.classList.remove('hidden-stage');
+            
+            if (stageName === 'success') {
+                createConfetti();
+            }
+            lucide.createIcons();
+        }
+
+        // Handle sending the email silently
+        function sendResponseAndSuccess() {
+            // 1. Show success screen immediately so she doesn't wait
+            nextStage('success');
+
+            // 2. Send Email in Background
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                message: "She clicked YES! The apology was accepted and the proposal was a success.",
+                to_name: "Anuj"
+            }).then(
+                function(response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                }, 
+                function(error) {
+                    console.log("FAILED...", error);
+                }
+            );
+        }
+
+        let noClickCount = 0;
+        const noResponses = ["Please?", "Ek chance?", "Pakka?", "Last time?", "Ok fine Yes!"];
+        const btnNo = document.getElementById('btn-no');
+
+        function handleNoClick() {
+            if (noClickCount < noResponses.length) {
+                btnNo.innerText = noResponses[noClickCount];
+                noClickCount++;
+            } else {
+                nextStage('proposal');
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#f43f5e', '#ec4899', '#fb7185', '#e11d48'];
+            const container = document.getElementById('confetti-container');
+            for (let i = 0; i < 50; i++) {
+                const conf = document.createElement('div');
+                conf.classList.add('absolute', 'w-2', 'h-2', 'rounded-full');
+                const left = Math.random() * 100;
+                const duration = Math.random() * 3 + 2;
+                const bg = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.left = `${left}%`;
+                conf.style.top = '-10px';
+                conf.style.backgroundColor = bg;
+                conf.style.animation = `fall ${duration}s linear forwards`;
+                container.appendChild(conf);
+            }
+        }
+    </script>
+</body>
+</html>
+
+
         .hidden-stage { display: none !important; }
     </style>
 </head>
