@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Polar Star 🌟</title>
+    <title>Happy Chocolate Day 🍫</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -23,118 +23,119 @@
             10% { opacity: 0.8; }
             100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
-        @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes tearOpen { 
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
         @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
-        
-        .animate-float { will-change: transform; }
-        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-        .animate-pop-in { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hide Scrollbar for cleaner mobile look */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+        .animate-float { will-change: transform; }
+        .animate-tear { animation: tearOpen 0.8s ease-in-out forwards; }
+        .animate-pop-in { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+
+        /* Hide Scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         .hidden-stage { display: none !important; }
+
+        /* CSS Foil Effect (No Image Required) */
+        .foil-pattern {
+            background-color: #D4AF37;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255, 0.1),
+                rgba(255,255,255, 0.1) 10px,
+                rgba(0,0,0, 0.1) 10px,
+                rgba(0,0,0, 0.1) 20px
+            );
+        }
     </style>
 </head>
-<body class="min-h-[100dvh] bg-gradient-to-br from-rose-100 via-pink-50 to-indigo-100 flex items-center justify-center p-0 overflow-hidden relative text-slate-800">
+<body class="min-h-[100dvh] bg-gradient-to-br from-[#3E2723] via-[#5D4037] to-[#3E2723] flex items-center justify-center p-0 overflow-hidden relative text-slate-800">
 
-    <div id="bg-hearts" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+    <!-- Floating Background Elements -->
+    <div id="bg-elements" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
 
-    <!-- STAGE 1: ENVELOPE -->
-    <div id="stage-envelope" class="w-full flex justify-center z-10 animate-fade-in-up px-4">
-        <div onclick="nextStage('letter')" class="group cursor-pointer relative bg-white w-[85vw] max-w-sm aspect-[4/3] rounded-xl shadow-2xl flex items-center justify-center border-2 border-rose-200 transform transition-all duration-500 hover:scale-105 hover:rotate-1">
-            <div class="absolute -top-10 animate-bounce">
-                <i data-lucide="mail" class="w-16 h-16 text-rose-500"></i>
+    <!-- STAGE 1: CHOCOLATE WRAPPER -->
+    <div id="stage-wrapper" class="w-full flex justify-center z-10 animate-fade-in-up px-4">
+        <div onclick="unwrapChocolate()" class="group cursor-pointer relative w-[85vw] max-w-sm aspect-[4/5] rounded-xl shadow-2xl flex flex-col items-center justify-center transform transition-all duration-500 hover:scale-105 overflow-hidden border-4 border-yellow-600">
+            
+            <!-- Pure CSS Gold Foil Background -->
+            <div class="absolute inset-0 foil-pattern z-0"></div>
+            
+            <!-- Chocolate Label -->
+            <div class="z-10 text-center relative bg-[#3E2723] p-6 w-full py-12 border-y-4 border-yellow-500 shadow-2xl">
+                <div class="bg-yellow-500 text-[#3E2723] px-4 py-1 rounded-full mb-3 inline-block shadow-md">
+                    <span class="font-bold tracking-widest uppercase text-[10px] md:text-xs">Premium Love Edition</span>
+                </div>
+                <h1 class="serif text-white text-4xl font-bold mb-1 drop-shadow-md">DAIRY <br> MILK</h1>
+                <p class="text-yellow-100/80 font-bold tracking-widest text-[10px] uppercase mt-2">Tap to Unwrap</p>
             </div>
-            <div class="text-center px-4 mt-4">
-                <p class="serif text-rose-800 text-2xl font-medium mb-2">For My Polar Star 🌟</p>
-                <p class="text-xs text-rose-400 uppercase tracking-widest font-semibold">Tap to open</p>
-            </div>
-            <div class="absolute w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-lg border-2 border-red-400 right-4 bottom-4 group-hover:bg-red-500 transition-colors">
-                <i data-lucide="heart" class="w-7 h-7 text-white fill-current"></i>
+
+            <!-- "Tear Here" Indicator -->
+            <div class="absolute top-2 right-2 p-2 animate-bounce bg-white/20 rounded-full">
+                <i data-lucide="scissors" class="w-6 h-6 text-[#3E2723] transform rotate-180"></i>
             </div>
         </div>
     </div>
 
-    <!-- STAGE 2: THE LETTER (Fixed Width & Scroll) -->
-    <div id="stage-letter" class="hidden-stage w-[92vw] max-w-lg bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden z-10 animate-fade-in-up border border-white/50 my-2">
-        <div class="h-2 bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 w-full"></div>
+    <!-- STAGE 2: THE LETTER -->
+    <div id="stage-letter" class="hidden-stage w-[92vw] max-w-lg bg-[#FFF8E1] backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden z-10 animate-fade-in-up border-4 border-[#3E2723] my-2">
+        <div class="h-3 bg-gradient-to-r from-[#5D4037] via-[#8D6E63] to-[#5D4037] w-full"></div>
         
-        <!-- Content Area -->
-        <div class="p-5 md:p-8 max-h-[75vh] md:max-h-[80vh] overflow-y-auto no-scrollbar">
-            <h1 class="serif text-3xl text-rose-700 mb-6 text-center leading-tight">
-                A Letter for My<br />Polar Star <i data-lucide="stars" class="inline w-6 h-6 text-yellow-500 mb-1"></i>
+        <div class="p-5 md:p-8 max-h-[80vh] overflow-y-auto no-scrollbar">
+            <h1 class="serif text-3xl text-[#3E2723] mb-6 text-center leading-tight">
+                To My Sweetest Habit <br><span class="text-xl italic text-amber-700">My Polar Star 🌟</span>
             </h1>
             
-            <div class="space-y-5 text-slate-700 text-[16px] leading-relaxed serif">
-                <p>Hey,</p>
-                <p>I’m writing this because sometimes my words get tangled up when I’m in front of you. I know I’ve made mistakes lately—probably more than I should. I know there are moments when I don’t understand the things you need, or I fail to show you how much you truly mean to me.</p>
-                <p>Sometimes, I feel like I’m failing at being the person you deserve. But I want you to know that even when I’m clumsy or quiet, my heart is always trying its best to reach yours. You have always been my <strong>Polar Star</strong>, the one who guides me when I’m lost in my own head.</p>
+            <div class="space-y-5 text-[#4E342E] text-[16px] leading-relaxed serif">
+                <p>Happy Chocolate Day! 🍫</p>
+                <p>They say life is like a box of chocolates, but honestly, my life was just a plain wrapper until you came along. I know lately, I’ve been serving you a lot of "Dark Chocolate"—moments that were bitter, moods that were hard to handle, and mistakes that left a bad taste.</p>
+                <p>I admit I am not perfect. Sometimes I get stuck in my own head, and I forget to add the sugar that our relationship deserves. But I want you to know one thing: <strong>You are the only sweetness I need.</strong></p>
                 
-                <div class="bg-rose-50 p-4 rounded-lg border-l-4 border-rose-300 my-6 italic text-rose-800 text-center font-medium">
-                    <p>"Mana ki bhatak jata hoon aksar raahon mein,<br/>Par teri hi roshni se har rasta nazaar aata hai.<br/>Tu naraz ho toh ruk jati hai dhadkan meri,<br/>Tujhse hi toh mera har ek pal muskuraata hai."</p>
+                <div class="bg-[#D7CCC8] p-4 rounded-lg border-l-4 border-[#5D4037] my-6 italic text-[#3E2723] text-center font-medium shadow-inner">
+                    <p>"Mana ki thodi kadwahat aa gayi hai baton mein,<br/>Par yaqeen kar, mithaas sirf tere hone se hai.<br/>Tu naraz bhi ho toh manzoor hai mujhe,<br/>Kyunki meri zindagi ka har flavor sirf tujhse hai."</p>
                 </div>
 
-                <p>I’m sorry for the times I didn't listen well or the times I didn't make you feel like the priority you are. I am still learning how to be the man you need, and I might trip along the way, but I promise I will never stop trying for us.</p>
-                <p>My heart has a "Neural Link" to yours that I never want to break. Please don't stay upset for too long; my world is a little darker when I can't see your smile.</p>
+                <p>Just like chocolate creates a rush of happiness in the brain, you are the signal that makes my heart beat properly. Without you, everything feels bland.</p>
+                <p>I promise to try harder to be the "Milk Chocolate" in your life—soft, comforting, and there to make your bad days better.</p>
 
-                <div class="bg-rose-50 p-4 rounded-lg border-l-4 border-rose-300 my-6 italic text-rose-800 text-center font-medium">
-                    <p>"Khata ho gayi ho toh maaf kar dena,<br/>Mere jazbaaton ko saaf padh lena.<br/>Nahi seekha hai maine dhang se ishq jatana,<br/>Par meri har koshish mein sirf tum hi rehna."</p>
+                <div class="bg-[#D7CCC8] p-4 rounded-lg border-l-4 border-[#5D4037] my-6 italic text-[#3E2723] text-center font-medium shadow-inner">
+                    <p>"KitKat ki tarah break le lete hai gusse se,<br/>Dairy Milk ki tarah ghul jaate hai ishq mein.<br/>Aaj promise karta hoon tujhse,<br/>Mithaas hi mithaas bhar dunga tere har ek risk mein."</p>
                 </div>
-                <p class="text-right font-bold mt-4 text-rose-600 text-lg">- Yours, always trying.</p>
+                
+                <p class="text-right font-bold mt-4 text-[#3E2723] text-lg">- Yours, Anuj.</p>
             </div>
 
-            <!-- Big Button for Easy Tapping -->
-            <button onclick="nextStage('apology')" class="w-full mt-8 bg-rose-500 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-rose-600 transition-all flex items-center justify-center gap-2 group active:scale-95">
-                Wait, one small request... <i data-lucide="heart" class="w-5 h-5 group-hover:scale-125 transition-transform fill-current"></i>
+            <button onclick="nextStage('question')" class="w-full mt-8 bg-[#5D4037] text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-[#3E2723] transition-all flex items-center justify-center gap-2 group active:scale-95 border border-[#3E2723]">
+                Can we make it sweet again? <i data-lucide="candy" class="w-5 h-5 group-hover:scale-125 transition-transform fill-current"></i>
             </button>
-            <div class="h-4"></div> <!-- Spacer at bottom -->
+            <div class="h-4"></div>
         </div>
     </div>
 
-    <!-- STAGE 3: APOLOGY (YES/NO) -->
-    <div id="stage-apology" class="hidden-stage w-[90vw] max-w-sm bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-8 z-10 text-center animate-pop-in border-4 border-rose-100">
-        <div class="mb-6 flex justify-center"><div class="bg-rose-100 p-5 rounded-full"><i data-lucide="frown" class="w-14 h-14 text-rose-500"></i></div></div>
-        <h2 class="text-2xl font-bold text-slate-800 mb-8 serif leading-relaxed">"Plz agar hoga toh maaf kar de..."</h2>
+    <!-- STAGE 3: THE QUESTION -->
+    <div id="stage-question" class="hidden-stage w-[90vw] max-w-sm bg-[#FFF8E1] rounded-3xl shadow-2xl p-6 md:p-8 z-10 text-center animate-pop-in border-4 border-[#3E2723]">
+        <div class="mb-6 flex justify-center"><div class="bg-[#D7CCC8] p-5 rounded-full border-2 border-[#5D4037]"><i data-lucide="heart-handshake" class="w-14 h-14 text-[#3E2723]"></i></div></div>
+        <h2 class="text-2xl font-bold text-[#3E2723] mb-8 serif leading-relaxed">"Will you accept this sweetness and forgive the bitterness?"</h2>
         <div class="flex flex-col gap-4 justify-center">
-            <button onclick="nextStage('proposal')" class="w-full py-4 bg-green-500 text-white rounded-xl font-bold text-xl shadow-lg transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-                <i data-lucide="smile" class="w-6 h-6"></i> Yes
+            <button onclick="sendResponseAndSuccess()" class="w-full py-4 bg-green-600 text-white rounded-xl font-bold text-xl shadow-lg transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 border-b-4 border-green-800">
+                <i data-lucide="smile" class="w-6 h-6"></i> Yes, Always
             </button>
-            <button id="btn-no" onclick="handleNoClick()" class="w-full py-4 bg-slate-200 text-slate-600 rounded-xl font-bold text-xl shadow-inner hover:bg-slate-300 transition-colors">No</button>
+            <button id="btn-no" onclick="handleNoClick()" class="w-full py-4 bg-[#D7CCC8] text-[#3E2723] rounded-xl font-bold text-xl shadow-inner hover:bg-[#BCAAA4] transition-colors">No</button>
         </div>
     </div>
 
-    <!-- STAGE 4: PROPOSAL -->
-    <div id="stage-proposal" class="hidden-stage w-[90vw] max-w-sm bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-8 z-10 text-center animate-pop-in border-4 border-rose-100">
-        <div class="mb-6 flex justify-center">
-            <div class="relative">
-                <div class="absolute -inset-1 rounded-full bg-rose-400 blur opacity-75 animate-pulse"></div>
-                <div class="relative bg-white p-5 rounded-full"><i data-lucide="sparkles" class="w-14 h-14 text-rose-500"></i></div>
-            </div>
-        </div>
-        <h2 class="text-3xl font-bold text-slate-800 mb-2 serif">Happy Propose Day!</h2>
-        <p class="text-rose-600 font-medium text-lg mb-6">Will you be my everything?</p>
-        <p class="text-slate-600 text-[15px] mb-8 italic">"Duniya badle toh badle, par tum mat badalna,<br/>Meri har khushi ki, tum hi toh chabi hai."</p>
-        <div class="flex flex-col gap-3">
-            <button onclick="sendResponseAndSuccess()" class="w-full py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white rounded-xl font-bold text-xl shadow-lg transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-                <i data-lucide="check" class="w-6 h-6"></i> YES, I will!
-            </button>
-        </div>
-    </div>
-
-    <!-- STAGE 5: SUCCESS -->
+    <!-- STAGE 4: SUCCESS -->
     <div id="stage-success" class="hidden-stage text-center z-10 animate-pop-in px-4">
-        <h1 class="text-5xl font-bold text-rose-600 mb-6 drop-shadow-sm serif">She Said Yes! ❤️</h1>
-        <p class="text-xl text-slate-700 mb-8 font-medium">You just made me the happiest person alive.</p>
+        <h1 class="text-4xl md:text-5xl font-bold text-yellow-400 mb-6 drop-shadow-md serif">She Accepted The Sweetness! 🍫</h1>
+        <p class="text-xl text-yellow-100 mb-8 font-medium">Life just got a whole lot tastier.</p>
         <div class="inline-block bg-white p-6 rounded-full shadow-xl animate-bounce">
-            <i data-lucide="heart" class="w-20 h-20 text-rose-500 fill-current"></i>
+            <i data-lucide="heart" class="w-20 h-20 text-red-500 fill-current"></i>
         </div>
     </div>
 
@@ -142,45 +143,68 @@
 
     <script>
         // ******************************************************
-        // ✅ KEYS INTEGRATED AND READY
+        // ✅ KEYS INTEGRATED (SAME AS BEFORE)
         // ******************************************************
-        
         const EMAILJS_PUBLIC_KEY = "AaMA0REytdKnOD5Ty"; 
         const EMAILJS_SERVICE_ID = "service_q7xf0fl"; 
         const EMAILJS_TEMPLATE_ID = "template_noy0tur"; 
-        
         // ******************************************************
 
-        // Initialize EmailJS
         (function() {
             emailjs.init(EMAILJS_PUBLIC_KEY);
         })();
 
         lucide.createIcons();
         
-        // Background Hearts
-        const bgContainer = document.getElementById('bg-hearts');
+        // Background Elements
+        const bgContainer = document.getElementById('bg-elements');
+        const icons = [
+            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#5D4037" stroke="none"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>', 
+            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#8D6E63" stroke="none"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>'
+        ];
+
         for (let i = 0; i < 20; i++) {
-            const heart = document.createElement('div');
-            heart.classList.add('absolute', 'text-pink-200', 'opacity-50', 'animate-float');
-            heart.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+            const el = document.createElement('div');
+            el.classList.add('absolute', 'opacity-30', 'animate-float');
+            el.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             const left = Math.random() * 100;
-            const size = Math.random() * 20 + 10;
-            const duration = 5 + Math.random() * 10;
+            const size = Math.random() * 30 + 15;
+            const duration = 8 + Math.random() * 10;
             const delay = Math.random() * 5;
-            heart.style.left = `${left}%`;
-            heart.style.bottom = '-10%';
-            heart.style.transform = `scale(${size/24})`;
-            heart.style.fontSize = `${size}px`;
-            heart.style.animation = `floatUp ${duration}s linear infinite`;
-            heart.style.animationDelay = `${delay}s`;
-            bgContainer.appendChild(heart);
+            el.style.left = `${left}%`;
+            el.style.bottom = '-10%';
+            el.style.transform = `scale(${size/24})`;
+            el.style.animation = `floatUp ${duration}s linear infinite`;
+            el.style.animationDelay = `${delay}s`;
+            bgContainer.appendChild(el);
+        }
+
+        // Logic to unwrap chocolate then show letter
+        function unwrapChocolate() {
+            const wrapper = document.getElementById('stage-wrapper');
+            // Remove enter animation, add tear animation
+            wrapper.classList.remove('animate-fade-in-up');
+            wrapper.classList.add('animate-tear');
+            
+            // Wait for animation to finish (800ms) then show letter
+            setTimeout(() => {
+                wrapper.classList.add('hidden-stage'); // Hide wrapper fully
+                nextStage('letter');
+            }, 750);
         }
 
         function nextStage(stageName) {
-            ['envelope', 'letter', 'apology', 'proposal', 'success'].forEach(id => {
-                document.getElementById(`stage-${id}`).classList.add('hidden-stage');
-            });
+            // Hide all stages first to be safe, except the one we want
+            if(stageName === 'letter') {
+                document.getElementById('stage-wrapper').classList.add('hidden-stage');
+                document.getElementById('stage-question').classList.add('hidden-stage');
+                document.getElementById('stage-success').classList.add('hidden-stage');
+            } else if (stageName === 'question') {
+                document.getElementById('stage-letter').classList.add('hidden-stage');
+            } else if (stageName === 'success') {
+                document.getElementById('stage-question').classList.add('hidden-stage');
+            }
+
             const stage = document.getElementById(`stage-${stageName}`);
             stage.classList.remove('hidden-stage');
             
@@ -190,27 +214,17 @@
             lucide.createIcons();
         }
 
-        // Handle sending the email silently
         function sendResponseAndSuccess() {
-            // 1. Show success screen immediately so she doesn't wait
             nextStage('success');
-
-            // 2. Send Email in Background
+            
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                message: "She clicked YES! The apology was accepted and the proposal was a success.",
+                message: "🍫 She accepted the CHOCOLATE! The sweetness is back. Happy Chocolate Day!",
                 to_name: "Anuj"
-            }).then(
-                function(response) {
-                    console.log("SUCCESS!", response.status, response.text);
-                }, 
-                function(error) {
-                    console.log("FAILED...", error);
-                }
-            );
+            });
         }
 
         let noClickCount = 0;
-        const noResponses = ["Please?", "Ek chance?", "Pakka?", "Last time?", "Ok fine Yes!"];
+        const noResponses = ["Are you sure?", "But it's Cadbury...", "Please?", "Last chance!", "Ok fine Yes!"];
         const btnNo = document.getElementById('btn-no');
 
         function handleNoClick() {
@@ -218,14 +232,14 @@
                 btnNo.innerText = noResponses[noClickCount];
                 noClickCount++;
             } else {
-                nextStage('proposal');
+                nextStage('question');
             }
         }
 
         function createConfetti() {
-            const colors = ['#f43f5e', '#ec4899', '#fb7185', '#e11d48'];
+            const colors = ['#FFD700', '#5D4037', '#8D6E63', '#FFA000']; 
             const container = document.getElementById('confetti-container');
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 60; i++) {
                 const conf = document.createElement('div');
                 conf.classList.add('absolute', 'w-2', 'h-2', 'rounded-full');
                 const left = Math.random() * 100;
@@ -243,3 +257,4 @@
 </html>
 
 
+                
